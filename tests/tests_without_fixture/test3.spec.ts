@@ -1,5 +1,5 @@
 import test from "@playwright/test";
-import { ToDoPage } from "../pages/todo-page";
+import { ToDoPage } from "../../pages/todo-page";
 
 const numberOfTasks = 100;
 const taskPrefix = "Felix ";

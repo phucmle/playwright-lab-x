@@ -1,5 +1,5 @@
 import test, { expect } from "@playwright/test";
-import { ProductPage } from "../pages/product-page";
+import { ProductPage } from "../../pages/product-page";
 
 const products = [
   { name: "Product 1", price: 10, quantity: 5 },

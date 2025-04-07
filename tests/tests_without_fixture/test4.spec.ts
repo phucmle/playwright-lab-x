@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
-import { PersonalNotePage } from "../pages/personal-note-page";
-import { ZingPage } from "../pages/zing-page";
+import { PersonalNotePage } from "../../pages/personal-note-page";
+import { ZingPage } from "../../pages/zing-page";
 
 interface Article {
   title: string;
