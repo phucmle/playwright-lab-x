@@ -12,7 +12,7 @@ export class BasePage {
   };
 
   openMainPage = async () => {
-    await this.page.goto("/");
+    await this.page.goto("https://material.playwrightvn.com");
   };
 
   goToPage = async (pageName: string) => {

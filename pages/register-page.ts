@@ -16,7 +16,7 @@ export class RegisterPage extends BasePage {
   //xpaths
   xUserNameInput = "//input[@id='username']";
   xEmailInput = "//input[@id='email']";
-  xGenderInput = (gender: string = "male" || "female") => {
+  xGenderInput = (gender: string) => {
     return `//input[@id='${gender}']`;
   };
   xHobbies = (hobbie: string) => {
