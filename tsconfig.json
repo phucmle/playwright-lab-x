@@ -9,6 +9,6 @@
       "outDir": "./dist",
       "types": ["node", "@cucumber/cucumber", "@playwright/test"]
     },
-    "include": ["steps/**/*.ts", "features/**/*.feature"],
+    "include": ["src/tests/**/*.ts"],
     "exclude": ["node_modules"]
 }

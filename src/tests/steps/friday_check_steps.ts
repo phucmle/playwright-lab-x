@@ -1,6 +1,6 @@
 const { expect } = require("@playwright/test");
-const { Given, When, Then } = require("@cucumber/cucumber");
 
+import { Given, When, Then } from "@cucumber/cucumber";
 const isItFriday = (today: string): boolean => {
   return today === "Friday" ? true : false;
 };
