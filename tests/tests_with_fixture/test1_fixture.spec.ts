@@ -11,8 +11,6 @@ const hobbiesText = testUserInformations.hobbies.join(", ");
 
 test.describe("Exercise input in Register page", () => {
   test("User Register", async ({ registerPage }) => {
-    // const registerPage = new RegisterPage(page);
-
     await test.step("Go to register page", async () => {
       await registerPage.openRegisterPage();
     });
@@ -21,17 +19,21 @@ test.describe("Exercise input in Register page", () => {
       await registerPage.fillRegisterForm(testUserInformations);
     });
 
-    await test.step("Verify results table", () => {
+    await test.step("Submit the form data", async () => {
+      await registerPage.submitForm();
+    });
+
+    await test.step("Verify results table", async () => {
       const userNameResult = registerPage.userNameResult;
       const emailResult = registerPage.emailResult;
       const informationResult = registerPage.informationResult;
 
-      expect(userNameResult).toHaveText(testUserInformations.userName);
-      expect(emailResult).toHaveText(testUserInformations.email);
-      expect(informationResult).toContainText(
+      await expect(userNameResult).toHaveText(testUserInformations.userName);
+      await expect(emailResult).toHaveText(testUserInformations.email);
+      await expect(informationResult).toContainText(
         `Gender: ${testUserInformations.gender}`
       );
-      expect(informationResult).toContainText(`Hobbies: ${hobbiesText}`);
+      await expect(informationResult).toContainText(`Hobbies: ${hobbiesText}`);
     });
   });
 });
