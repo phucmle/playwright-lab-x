@@ -22,6 +22,10 @@ test.describe("Exercise input in Register page", () => {
       await registerPage.fillRegisterForm(testUserInformations);
     });
 
+    await test.step("Submit the form data", async () => {
+      await registerPage.submitForm();
+    });
+
     await test.step("Verify results table", () => {
       const userNameResult = registerPage.userNameResult;
       const emailResult = registerPage.emailResult;
