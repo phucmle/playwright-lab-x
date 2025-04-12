@@ -26,17 +26,17 @@ test.describe("Exercise input in Register page", () => {
       await registerPage.submitForm();
     });
 
-    await test.step("Verify results table", () => {
+    await test.step("Verify results table", async () => {
       const userNameResult = registerPage.userNameResult;
       const emailResult = registerPage.emailResult;
       const informationResult = registerPage.informationResult;
 
-      expect(userNameResult).toHaveText(testUserInformations.userName);
-      expect(emailResult).toHaveText(testUserInformations.email);
-      expect(informationResult).toContainText(
+      await expect(userNameResult).toHaveText(testUserInformations.userName);
+      await expect(emailResult).toHaveText(testUserInformations.email);
+      await expect(informationResult).toContainText(
         `Gender: ${testUserInformations.gender}`
       );
-      expect(informationResult).toContainText(`Hobbies: ${hobbiesText}`);
+      await expect(informationResult).toContainText(`Hobbies: ${hobbiesText}`);
     });
   });
 });
