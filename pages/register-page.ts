@@ -16,7 +16,10 @@ export class RegisterPage extends BasePage {
   //xpaths
   xUserNameInput = "//input[@id='username']";
   xEmailInput = "//input[@id='email']";
-  xGenderInput = (gender: string = "male" || "female") => {
+  xGenderInput = (gender: string = "male") => {
+    if (gender !== "male" && gender !== "female") {
+      throw new Error("Gender must be either 'male' or 'female'");
+    }
     return `//input[@id='${gender}']`;
   };
   xHobbies = (hobbie: string) => {
@@ -32,9 +35,11 @@ export class RegisterPage extends BasePage {
   xNewsLetter = "//input[@id='newsletter']";
   xToggleOption = "//span[@class='slider round']";
   xSubmitBtn = "//button[@type='submit']";
-  xUserNameResult = "//table[@id='userTable']//td[2]";
-  xEmailResult = "//table[@id='userTable']//td[3]";
-  xInformationResult = "//table[@id='userTable']//td[4]";
+  xTableResult = "//table[@id='userTable']";
+  xTableResultBody = `${this.xTableResult}/tbody`;
+  xUserNameResult = `${this.xTableResult}//td[2]`;
+  xEmailResult = `${this.xTableResult}//td[3]`;
+  xInformationResult = `${this.xTableResult}//td[4]`;
 
   //locators
   userNameInput = this.page.locator(this.xUserNameInput);
@@ -55,6 +60,7 @@ export class RegisterPage extends BasePage {
   newsLetterInput = this.page.locator(this.xNewsLetter);
   toggleOptionInput = this.page.locator(this.xToggleOption);
   submitBtn = this.page.locator(this.xSubmitBtn);
+  tableResultBody = this.page.locator(this.xTableResultBody);
   emailResult = this.page.locator(this.xEmailResult);
   userNameResult = this.page.locator(this.xUserNameResult);
   informationResult = this.page.locator(this.xInformationResult);
@@ -95,9 +101,12 @@ export class RegisterPage extends BasePage {
     await this.favouriteInput.fill("#111111");
     //Newsletter
     await this.newsLetterInput.check();
-    //Enable feauture
+    //Enable feature
     await this.toggleOptionInput.setChecked(true);
-    //Register
+  };
+
+  submitForm = async () => {
     await this.submitBtn.click();
+    await this.tableResultBody.waitFor({ state: "visible" });
   };
 }
