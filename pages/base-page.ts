@@ -19,4 +19,20 @@ export class BasePage {
     await this.page.locator(`//a[contains(text(),'${pageName}')]`).click();
     await this.page.waitForLoadState("networkidle");
   };
+
+  // getDialogMsg = async () => {
+  //   this.page.once("dialog", (dialog) => {
+  //     dialog.accept();
+  //     return dialog.message();
+  //   });
+  // };
+  getDialogMsg = (): Promise<string> => {
+    return new Promise((resolve) => {
+      this.page.once("dialog", async (dialog) => {
+        await dialog.accept();
+        const message = dialog.message();
+        resolve(message);
+      });
+    });
+  };
 }

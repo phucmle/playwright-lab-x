@@ -3,6 +3,7 @@ import { ProductPage } from "../pages/product-page";
 import { ToDoPage } from "../pages/todo-page";
 import { PersonalNotePage } from "../pages/personal-note-page";
 import { ZingPage } from "../pages/zing-page";
+import { DragAndDropPage } from "../pages/drag-and-drop-page";
 import { test as base } from "@playwright/test";
 
 // Declare the types of your fixtures.
@@ -12,6 +13,7 @@ type MyFixtures = {
   toDoPage: ToDoPage;
   personalNotePage: PersonalNotePage;
   zingPage: ZingPage;
+  dragAndDropPage: DragAndDropPage;
 };
 
 // Extend base test by providing "registerPage" and "productPage"...
@@ -37,6 +39,9 @@ export const test = base.extend<MyFixtures>({
   },
   zingPage: async ({ page }, use) => {
     await use(new ZingPage(page));
+  },
+  dragAndDropPage: async ({ page }, use) => {
+    await use(new DragAndDropPage(page));
   },
 });
 
