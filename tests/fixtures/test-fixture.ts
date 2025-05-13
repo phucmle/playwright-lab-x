@@ -1,9 +1,9 @@
-import { RegisterPage } from "../pages/register-page";
-import { ProductPage } from "../pages/product-page";
-import { ToDoPage } from "../pages/todo-page";
-import { PersonalNotePage } from "../pages/personal-note-page";
-import { ZingPage } from "../pages/zing-page";
-import { DragAndDropPage } from "../pages/drag-and-drop-page";
+import { RegisterPage } from "../../pages/register-page";
+import { ProductPage } from "../../pages/product-page";
+import { ToDoPage } from "../../pages/todo-page";
+import { PersonalNotePage } from "../../pages/personal-note-page";
+import { ZingPage } from "../../pages/zing-page";
+import { DragAndDropPage } from "../../pages/drag-and-drop-page";
 import { test as base } from "@playwright/test";
 
 // Declare the types of your fixtures.
