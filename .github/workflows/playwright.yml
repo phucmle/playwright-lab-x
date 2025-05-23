@@ -28,7 +28,7 @@ jobs:
         if: success() || failure()
         with:
           name: Playwright Tests Reports
-          path: "**/reports/jest-*.xml"
+          path: "**/test-results.xml"
           reporter: java-junit
 
       - uses: actions/upload-artifact@v4
