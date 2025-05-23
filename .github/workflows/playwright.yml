@@ -1,13 +1,14 @@
 name: Playwright Tests
 on:
   push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main, develop]
+    branches: [test-reporter]
+
 jobs:
   run-playwright-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -20,6 +21,16 @@ jobs:
         run: npx playwright install chromium --with-deps
       - name: Run Playwright tests
         run: npm run test:all
+        continue-on-error: true
+
+      - name: Test Report
+        uses: dorny/test-reporter@v2
+        if: success() || failure()
+        with:
+          name: Playwright Tests Reports
+          path: "**/reports/jest-*.xml"
+          reporter: java-junit
+
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
