@@ -5,7 +5,7 @@ import {ToDoPage} from "../../pages/todo-page";
 import {PersonalNotePage} from "../../pages/personal-note-page";
 import {ZingPage} from "../../pages/zing-page";
 import {DragAndDropPage} from "../../pages/drag-and-drop-page";
-import {StudentManagementPage} from "../../pages/studen-management-page";
+import {StudentManagementPage} from "../../pages/student-management-page";
 
 // Declare the types of your fixtures.
 type MyFixtures = {
