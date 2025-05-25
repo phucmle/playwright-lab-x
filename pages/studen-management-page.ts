@@ -1,5 +1,6 @@
 import {BasePage} from "./base-page";
 import {Page} from "playwright";
+import fs from "fs";
 
 export class StudentManagementPage extends BasePage {
 
@@ -9,12 +10,16 @@ export class StudentManagementPage extends BasePage {
     xSearchBtn = "//button[@id='searchButton']"
     xStudentTable = "//table[@id='studentTable']"
     xStudentTableBody = `${this.xStudentTable}/tbody`
+    xExportBtn = "//button[@id='exportButton']"
+    xImportBtn = "//button[@id='importButton']"
 
     //locators
     searchInput = this.page.locator(this.xSearchInput)
     filterCriteria = this.page.locator(this.xFilterCriteria)
     searchBtn = this.page.locator(this.xSearchBtn)
     studentTableBody = this.page.locator(this.xStudentTableBody)
+    exportBtn = this.page.locator(this.xExportBtn)
+    importBtn = this.page.locator(this.xImportBtn)
 
     constructor(page: Page) {
         super(page);
@@ -67,5 +72,26 @@ export class StudentManagementPage extends BasePage {
             }
         }
         return true;
+    }
+
+    exportStudentList = async (exportDir: string = "./test-data", filePath: string) => {
+        if (!fs.existsSync(exportDir)) {
+            fs.mkdirSync(exportDir, {recursive: true});
+        }
+
+        const downloadPromise = this.page.waitForEvent('download');
+        await this.exportBtn.click();
+        const download = await downloadPromise;
+
+        // Wait for the download process to complete and save the downloaded file somewhere.
+        await download.saveAs(filePath);
+    }
+
+    importStudentList = async (filePath: string) => {
+        // Start waiting for file chooser before clicking. Note no await.
+        const fileChooserPromise = this.page.waitForEvent('filechooser');
+        await this.importBtn.click();
+        const fileChooser = await fileChooserPromise;
+        await fileChooser.setFiles(filePath);
     }
 }
