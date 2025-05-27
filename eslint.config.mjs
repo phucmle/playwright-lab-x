@@ -1,7 +1,9 @@
 import js from '@eslint/js';
-import playwright from 'eslint-plugin-playwright';
 import typescript from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
+import prettierConfig from 'eslint-config-prettier';
+import playwright from 'eslint-plugin-playwright';
+import prettier from 'eslint-plugin-prettier'; // Add this import
 
 export default [
   // Base JavaScript configuration
@@ -28,10 +30,6 @@ export default [
       'no-var': 'error', // Disallow var declarations (use let/const instead)
       eqeqeq: ['error', 'always'], // Require === and !== instead of == and !=
       curly: ['error', 'all'], // Require curly braces around all control statements
-      'no-trailing-spaces': 'error', // Disallow trailing whitespace at end of lines
-      indent: ['error', 2], // Enforce 2-space indentation
-      quotes: ['error', 'single'], // Enforce single quotes for strings
-      semi: ['error', 'always'], // Require semicolons at end of statements
     },
   },
 
@@ -219,5 +217,16 @@ export default [
       'public/**', // Static assets
       'static/**', // Static assets
     ],
+  },
+  //prettier config
+  {
+    files: ['**/*.{js,ts,jsx,tsx,mjs,cjs}'],
+    plugins: {
+      prettier: prettier,
+    },
+    rules: {
+      'prettier/prettier': 'error',
+    },
+    ...prettierConfig,
   },
 ];

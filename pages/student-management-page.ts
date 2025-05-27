@@ -1,6 +1,6 @@
-import { BasePage } from './base-page';
-import { Locator, Page } from 'playwright';
 import fs from 'fs';
+import type { Locator, Page } from 'playwright';
+import { BasePage } from './base-page';
 
 export class StudentManagementPage extends BasePage {
   // Private selector strings
@@ -78,7 +78,7 @@ export class StudentManagementPage extends BasePage {
     return true;
   };
 
-  exportStudentList = async (exportDir: string = './test-data', filePath: string) => {
+  exportStudentList = async (exportDir = './test-data', filePath: string) => {
     if (!fs.existsSync(exportDir)) {
       fs.mkdirSync(exportDir, { recursive: true });
     }
