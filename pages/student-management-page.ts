@@ -1,28 +1,33 @@
 import {BasePage} from "./base-page";
-import {Page} from "playwright";
+import {Locator, Page} from "playwright";
 import fs from "fs";
 
 export class StudentManagementPage extends BasePage {
 
-    //xpaths
-    xSearchInput = "//input[@id='searchInput']"
-    xFilterCriteria = "//select[@id='filterCriteria']"
-    xSearchBtn = "//button[@id='searchButton']"
-    xStudentTable = "//table[@id='studentTable']"
-    xStudentTableBody = `${this.xStudentTable}/tbody`
-    xExportBtn = "//button[@id='exportButton']"
-    xImportBtn = "//button[@id='importButton']"
+    // Private selector strings
+    private readonly xSearchInput = "//input[@id='searchInput']";
+    private readonly xFilterCriteria = "//select[@id='filterCriteria']";
+    private readonly xSearchBtn = "//button[@id='searchButton']";
+    private readonly xStudentTable = "//table[@id='studentTable']";
+    private readonly xExportBtn = "//button[@id='exportButton']";
+    private readonly xImportBtn = "//button[@id='importButton']";
 
-    //locators
-    searchInput = this.page.locator(this.xSearchInput)
-    filterCriteria = this.page.locator(this.xFilterCriteria)
-    searchBtn = this.page.locator(this.xSearchBtn)
-    studentTableBody = this.page.locator(this.xStudentTableBody)
-    exportBtn = this.page.locator(this.xExportBtn)
-    importBtn = this.page.locator(this.xImportBtn)
+    // Public locators (or make these private too)
+    readonly searchInput: Locator;
+    readonly filterCriteria: Locator;
+    readonly searchBtn: Locator;
+    readonly studentTableBody: Locator;
+    readonly exportBtn: Locator;
+    readonly importBtn: Locator;
 
     constructor(page: Page) {
         super(page);
+        this.searchInput = this.page.locator(this.xSearchInput);
+        this.filterCriteria = this.page.locator(this.xFilterCriteria);
+        this.searchBtn = this.page.locator(this.xSearchBtn);
+        this.studentTableBody = this.page.locator(`${this.xStudentTable}/tbody`);
+        this.exportBtn = this.page.locator(this.xExportBtn);
+        this.importBtn = this.page.locator(this.xImportBtn);
     }
 
     //functions

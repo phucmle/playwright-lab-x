@@ -4,8 +4,16 @@ import fs from "fs";
 import path from "node:path";
 
 test.describe("Search student in Student management page", () => {
+    const EXPORT_DIR = "./test-data/T006";
+
     test.beforeEach("Go to student management page", async ({studentManagementPage}) => {
         await studentManagementPage.openStudentManagementPage();
+    })
+
+    test.afterEach("Remove the test data", async () => {
+        if (fs.existsSync(EXPORT_DIR)) {
+            fs.rmSync(EXPORT_DIR, {recursive: true, force: true});
+        }
     })
 
     test("Search student by class", async ({studentManagementPage}) => {
@@ -31,7 +39,6 @@ test.describe("Search student in Student management page", () => {
     })
 
     test("Export and import the student data", async ({studentManagementPage}) => {
-        const EXPORT_DIR = "./test-data/T006";
         const ORG_FILE_NAME = "01_original_student_list.csv";
         const REMOVED_FILE_NAME = "02_removed_students_file.csv";
         const ADDED_FILE_NAME = "03_added_students_file.csv";
