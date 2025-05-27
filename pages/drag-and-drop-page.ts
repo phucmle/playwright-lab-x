@@ -1,5 +1,5 @@
-import { Locator, Page } from "playwright";
-import { BasePage } from "./base-page";
+import { Locator, Page } from 'playwright';
+import { BasePage } from './base-page';
 
 export class DragAndDropPage extends BasePage {
   constructor(page: Page) {
@@ -27,6 +27,6 @@ export class DragAndDropPage extends BasePage {
   //functions
   openDragAndDropPage = async () => {
     await this.openMainPage();
-    await this.goToPage("Puzzle drag and drop game");
+    await this.goToPage('Puzzle drag and drop game');
   };
 }

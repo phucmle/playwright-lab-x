@@ -1,5 +1,5 @@
-import { Locator, Page } from "playwright";
-import { BasePage } from "./base-page";
+import { Locator, Page } from 'playwright';
+import { BasePage } from './base-page';
 
 export interface IArticle {
   title: string;
@@ -11,10 +11,10 @@ export class ZingPage extends BasePage {
     super(page);
   }
 
-  zingUrl = "https://znews.vn/";
+  zingUrl = 'https://znews.vn/';
 
   //xpath
-  xArticles = "//article[contains(@class,article-item)]";
+  xArticles = '//article[contains(@class,article-item)]';
 
   //locator
   articles = this.page.locator(this.xArticles);
@@ -47,8 +47,7 @@ export class ZingPage extends BasePage {
       // Check if the article has both title and content
       if (hasTitleAndContent) {
         articles.push({ title: newsTitle, content: newsContent });
-        const hasExpectedNumberOfNotes: boolean =
-          articles.length === numberOfNotes;
+        const hasExpectedNumberOfNotes: boolean = articles.length === numberOfNotes;
         //Exit for loop when it reaches the expected number
         if (hasExpectedNumberOfNotes) {
           break;

@@ -1,5 +1,5 @@
-import { Locator, Page } from "playwright";
-import { BasePage } from "./base-page";
+import { Locator, Page } from 'playwright';
+import { BasePage } from './base-page';
 
 export class ToDoPage extends BasePage {
   constructor(page: Page) {
@@ -18,15 +18,15 @@ export class ToDoPage extends BasePage {
 
   //functions
   getBtnId = (btn: Locator) => {
-    return btn.getAttribute("id");
+    return btn.getAttribute('id');
   };
 
   openToDoPage = async () => {
     await this.openMainPage();
-    await this.goToPage("Todo page");
+    await this.goToPage('Todo page');
   };
 
-  addTasks = async (numberOfTasks: number, taskPrefix: string = "Todo ") => {
+  addTasks = async (numberOfTasks: number, taskPrefix: string = 'Todo ') => {
     for (let i = 1; i <= numberOfTasks; i++) {
       const taskName = taskPrefix + i;
       await this.taskInput.fill(taskName);
@@ -57,14 +57,14 @@ export class ToDoPage extends BasePage {
       const deleteButton = deleteButtons[i];
       const buttonId = await this.getBtnId(deleteButton);
       if (!buttonId) {
-        throw new Error("Button id not found");
+        throw new Error('Button id not found');
       }
 
-      const idNumber = buttonId.split("-")[1];
+      const idNumber = buttonId.split('-')[1];
       const isOdd: boolean = parseInt(idNumber) % 2 !== 0;
 
       if (isOdd) {
-        this.page.once("dialog", (dialog) => dialog.accept());
+        this.page.once('dialog', (dialog) => dialog.accept());
         await deleteButton.click();
       }
     }

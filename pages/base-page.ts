@@ -1,4 +1,4 @@
-import { Page } from "playwright";
+import { Page } from 'playwright';
 
 export class BasePage {
   page: Page;
@@ -12,12 +12,12 @@ export class BasePage {
   };
 
   openMainPage = async () => {
-    await this.page.goto("/");
+    await this.page.goto('/');
   };
 
   goToPage = async (pageName: string) => {
     await this.page.locator(`//a[contains(text(),'${pageName}')]`).click();
-    await this.page.waitForLoadState("networkidle");
+    await this.page.waitForLoadState('networkidle');
   };
 
   // getDialogMsg = async () => {
@@ -28,7 +28,7 @@ export class BasePage {
   // };
   getDialogMsg = (): Promise<string> => {
     return new Promise((resolve) => {
-      this.page.once("dialog", async (dialog) => {
+      this.page.once('dialog', async (dialog) => {
         await dialog.accept();
         const message = dialog.message();
         resolve(message);
