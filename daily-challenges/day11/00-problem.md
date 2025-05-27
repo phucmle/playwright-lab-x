@@ -24,7 +24,7 @@ Write a function to calculate the tip amount based on the total bill and tip per
 
 - For the following website: https://material.playwrightvn.com/021-import-export.html
 - Perform the following operations:
-    - Search for students by class: A4
-    - Verify that only 1 student is in class A4
-    - Clear the search content
-    - Verify that all students appear
+  - Search for students by class: A4
+  - Verify that only 1 student is in class A4
+  - Clear the search content
+  - Verify that all students appear

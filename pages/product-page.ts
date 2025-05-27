@@ -1,5 +1,5 @@
-import { Page } from "playwright";
-import { BasePage } from "./base-page";
+import { Page } from 'playwright';
+import { BasePage } from './base-page';
 
 interface IProduct {
   name: string;
@@ -39,12 +39,12 @@ export class ProductPage extends BasePage {
   //functions
   openProductPage = async () => {
     await this.openMainPage();
-    await this.goToPage("Product page");
+    await this.goToPage('Product page');
   };
 
   addProduct = async (product: IProduct) => {
     const addButton = this.addBtn(product.name);
-    await addButton.waitFor({ state: "visible" });
+    await addButton.waitFor({ state: 'visible' });
     await addButton.click({
       clickCount: product.quantity,
       delay: 100,

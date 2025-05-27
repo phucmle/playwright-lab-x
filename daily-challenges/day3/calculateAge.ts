@@ -2,16 +2,15 @@ function calculateAge(birthYear: number) {
   const today = new Date();
   const currentYear = today.getFullYear();
 
-  const isValidBirthYear =
-    Number.isInteger(birthYear) && birthYear <= currentYear;
+  const isValidBirthYear = Number.isInteger(birthYear) && birthYear <= currentYear;
 
   if (isValidBirthYear) {
     const age = currentYear - birthYear;
-    console.table({ "Your Birth Year": birthYear, "Your Age": age });
+    console.table({ 'Your Birth Year': birthYear, 'Your Age': age });
   } else {
     console.table({
-      "Your Birth Year": birthYear,
-      "Your Age": "Invalid year of birth",
+      'Your Birth Year': birthYear,
+      'Your Age': 'Invalid year of birth',
     });
   }
 }

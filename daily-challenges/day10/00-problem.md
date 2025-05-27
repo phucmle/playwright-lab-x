@@ -17,37 +17,37 @@ of the string.
 **Input 1**:
 
 ```javascript
-"   Xin   chào   mọi người   "
+'   Xin   chào   mọi người   ';
 ```
 
 **Output 1**:
 
 ```javascript
-"Xin chào mọi người"
+'Xin chào mọi người';
 ```
 
 **Input 2**:
 
 ```javascript
-"   JavaScript    is    fun   "
+'   JavaScript    is    fun   ';
 ```
 
 **Output 2**:
 
 ```javascript
-"JavaScript is fun"
+'JavaScript is fun';
 ```
 
 **Input 3**:
 
 ```javascript
-"   Lập  trình   JavaScript   "
+'   Lập  trình   JavaScript   ';
 ```
 
 **Output 3**:
 
 ```javascript
-"Lập trình JavaScript"
+'Lập trình JavaScript';
 ```
 
 # Playwright

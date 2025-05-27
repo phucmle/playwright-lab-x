@@ -1,6 +1,6 @@
-import { Page } from "playwright";
-import { BasePage } from "./base-page";
-import { IArticle } from "./zing-page";
+import { Page } from 'playwright';
+import { BasePage } from './base-page';
+import { IArticle } from './zing-page';
 
 export class PersonalNotePage extends BasePage {
   constructor(page: Page) {
@@ -26,7 +26,7 @@ export class PersonalNotePage extends BasePage {
   //functions
   openPersonalNotePage = async () => {
     await this.openMainPage();
-    await this.goToPage("Personal notes");
+    await this.goToPage('Personal notes');
   };
 
   addNotesWithArticles = async (articles: IArticle[]) => {
@@ -39,7 +39,7 @@ export class PersonalNotePage extends BasePage {
 
   getSearchTerm = async (
     articles: IArticle[],
-    searchBy: "title" | "content",
+    searchBy: 'title' | 'content',
     numberOfSearchCharacters: number
   ) => {
     //Get search term by random title or content of article

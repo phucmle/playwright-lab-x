@@ -14,7 +14,7 @@ const testArrays: Array<Array<number>> = [
 
 function findLargestNumber(arr: Array<number>): number | string {
   if (arr.length === 0) {
-    return "Empty array";
+    return 'Empty array';
   }
 
   let largestNumber = arr[0];
@@ -31,5 +31,5 @@ function findLargestNumber(arr: Array<number>): number | string {
 testArrays.forEach((array, index) => {
   console.log(`Test Array ${index + 1}:`, array);
   console.log(`Largest Number:`, findLargestNumber(array));
-  console.log("---");
+  console.log('---');
 });

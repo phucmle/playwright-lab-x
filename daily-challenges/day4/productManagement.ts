@@ -45,11 +45,11 @@ function calculateTotal() {
   return total;
 }
 
-addProduct("Apple", 5000, 5);
-addProduct("Banana", 2000, 1);
-addProduct("Mango", 3333, 2);
+addProduct('Apple', 5000, 5);
+addProduct('Banana', 2000, 1);
+addProduct('Mango', 3333, 2);
 
-removeProduct("Banana");
+removeProduct('Banana');
 
 console.table(productList);
-console.table({ "Total is: ": calculateTotal() });
+console.table({ 'Total is: ': calculateTotal() });
