@@ -1,10 +1,13 @@
-interface ITestCase {
-  input: any;
-  expectedOutput: any;
+interface ITestCase<TInput, TOutput> {
+  input: TInput;
+  expectedOutput: TOutput;
 }
 
 //Common function to test a specific function with the testcases
-export function testFunction(functionName: (input: any) => any, testCases: ITestCase[]) {
+export function testFunction<TInput, TOutput>(
+  functionName: (input: TInput) => TOutput,
+  testCases: ITestCase<TInput, TOutput>[]
+): void {
   let isAllPassed = true;
   testCases.forEach((testCase) => {
     const actualOutput = functionName(testCase.input);

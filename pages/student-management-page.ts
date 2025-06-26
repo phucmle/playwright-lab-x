@@ -11,13 +11,13 @@ export class StudentManagementPage extends BasePage {
   private readonly xExportBtn = "//button[@id='exportButton']";
   private readonly xImportBtn = "//button[@id='importButton']";
 
-  // Public locators (or make these private too)
-  readonly searchInput: Locator;
-  readonly filterCriteria: Locator;
-  readonly searchBtn: Locator;
-  readonly studentTableBody: Locator;
-  readonly exportBtn: Locator;
-  readonly importBtn: Locator;
+  // Public locators
+  public readonly searchInput: Locator;
+  public readonly filterCriteria: Locator;
+  public readonly searchBtn: Locator;
+  public readonly studentTableBody: Locator;
+  public readonly exportBtn: Locator;
+  public readonly importBtn: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -30,12 +30,12 @@ export class StudentManagementPage extends BasePage {
   }
 
   //functions
-  openStudentManagementPage = async () => {
+  public openStudentManagementPage = async (): Promise<void> => {
     await this.openMainPage();
     await this.goToPage('Xử lý import, export');
   };
 
-  applyFilter = async (filterCriteria: string) => {
+  private applyFilter = async (filterCriteria: string): Promise<void> => {
     switch (filterCriteria) {
       case 'name':
         await this.filterCriteria.selectOption('ten');
@@ -55,20 +55,20 @@ export class StudentManagementPage extends BasePage {
     }
   };
 
-  searchBy = async (filter: string, input: string) => {
+  public searchBy = async (filter: string, input: string): Promise<void> => {
     await this.applyFilter(filter);
     await this.searchInput.fill(input);
     await this.searchBtn.click();
     await this.page.waitForTimeout(1000);
   };
 
-  hasStudent = async (studentName: string) => {
+  public hasStudent = async (studentName: string): Promise<boolean> => {
     const matchingStudent = this.studentTableBody.filter({ hasText: studentName });
     // const matchingStudent = this.studentTableBody.getByRole('cell', {name: studentName});
     return await matchingStudent.isVisible();
   };
 
-  hasAllStudents = async (studentNames: string[]) => {
+  public hasAllStudents = async (studentNames: string[]): Promise<boolean> => {
     for (const studentName of studentNames) {
       const hasStudent = await this.hasStudent(studentName);
       if (!hasStudent) {
@@ -78,7 +78,7 @@ export class StudentManagementPage extends BasePage {
     return true;
   };
 
-  exportStudentList = async (exportDir = './test-data', filePath: string) => {
+  public exportStudentList = async (exportDir = './test-data', filePath: string): Promise<void> => {
     if (!fs.existsSync(exportDir)) {
       fs.mkdirSync(exportDir, { recursive: true });
     }
@@ -91,7 +91,7 @@ export class StudentManagementPage extends BasePage {
     await download.saveAs(filePath);
   };
 
-  importStudentList = async (filePath: string) => {
+  public importStudentList = async (filePath: string): Promise<void> => {
     // Start waiting for file chooser before clicking. Note no await.
     const fileChooserPromise = this.page.waitForEvent('filechooser');
     await this.importBtn.click();

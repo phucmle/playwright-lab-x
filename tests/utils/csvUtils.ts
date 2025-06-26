@@ -1,12 +1,12 @@
 import fs from 'fs';
 
 export class CsvUtils {
-  static readFileContents = async (filePath: string) => {
+  public static readFileContents = async (filePath: string) => {
     const fileContents = fs.readFileSync(filePath, 'utf-8');
     return fileContents.split('\n').map((line) => line.split(','));
   };
 
-  static reIndexTheList = (list: string[][]) => {
+  public static reIndexTheList = (list: string[][]) => {
     list.forEach((line, index) => {
       //Exclude the header line
       if (index > 0) {
@@ -16,7 +16,7 @@ export class CsvUtils {
     return list;
   };
 
-  static addStudentsToList = (studentList: string[][], newStudents: any[]) => {
+  public static addStudentsToList = (studentList: string[][], newStudents: INewStudent[]) => {
     const newStudentList = [...studentList];
 
     newStudents.forEach((student) => {
@@ -33,8 +33,17 @@ export class CsvUtils {
     return this.reIndexTheList(newStudentList);
   };
 
-  static removeStudentsFromList = (studentList: string[][], filter: string) => {
+  public static removeStudentsFromList = (studentList: string[][], filter: string) => {
     const newStudentList = studentList.filter((line) => !line.includes(filter));
     return this.reIndexTheList(newStudentList);
   };
+}
+
+interface INewStudent {
+  no: string;
+  fullname: string;
+  class: string;
+  math_point: string;
+  physics_point: string;
+  chemistry_point: string;
 }

@@ -1,32 +1,26 @@
-import { Page } from 'playwright';
+import type { Page } from 'playwright';
 
 export class BasePage {
-  page: Page;
+  public readonly page: Page;
 
   constructor(page: Page) {
     this.page = page;
   }
 
-  navigateTo = async (url: string) => {
+  public navigateTo = async (url: string): Promise<void> => {
     await this.page.goto(url);
   };
 
-  openMainPage = async () => {
+  public openMainPage = async (): Promise<void> => {
     await this.page.goto('/');
   };
 
-  goToPage = async (pageName: string) => {
+  public goToPage = async (pageName: string): Promise<void> => {
     await this.page.locator(`//a[contains(text(),'${pageName}')]`).click();
     await this.page.waitForLoadState('networkidle');
   };
 
-  // getDialogMsg = async () => {
-  //   this.page.once("dialog", (dialog) => {
-  //     dialog.accept();
-  //     return dialog.message();
-  //   });
-  // };
-  getDialogMsg = (): Promise<string> => {
+  public getDialogMsg = (): Promise<string> => {
     return new Promise((resolve) => {
       this.page.once('dialog', async (dialog) => {
         await dialog.accept();

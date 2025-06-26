@@ -1,6 +1,6 @@
 import { testFunction } from '../00-helper/helper';
 
-function sumArray(arr: any[]): string {
+function sumArray(arr: unknown[]): string {
   if (arr.length === 0) {
     return 'Empty array';
   }
@@ -21,7 +21,7 @@ function sumArray(arr: any[]): string {
 }
 
 interface ITestCase {
-  input: any[];
+  input: unknown[];
   expectedOutput: string;
 }
 

@@ -1,4 +1,4 @@
-import { Locator, Page } from 'playwright';
+import type { Locator, Page } from 'playwright';
 import { BasePage } from './base-page';
 
 export interface IArticle {
@@ -11,29 +11,29 @@ export class ZingPage extends BasePage {
     super(page);
   }
 
-  zingUrl = 'https://znews.vn/';
+  public readonly zingUrl = 'https://znews.vn/';
 
   //xpath
-  xArticles = '//article[contains(@class,article-item)]';
+  private readonly xArticles = '//article[contains(@class,article-item)]';
 
   //locator
-  articles = this.page.locator(this.xArticles);
+  public readonly articles = this.page.locator(this.xArticles);
 
   //functions
-  openZingPage = async () => {
+  public openZingPage = async (): Promise<void> => {
     await this.navigateTo(this.zingUrl);
   };
 
-  getArticleTitle = async (article: Locator) => {
+  private getArticleTitle = async (article: Locator): Promise<string> => {
     return await article.locator("//p[@class='article-title']").innerText();
   };
 
-  getArticleSummary = async (article: Locator) => {
+  private getArticleSummary = async (article: Locator): Promise<string> => {
     return await article.locator("//p[@class='article-summary']").innerText();
   };
 
-  getArticles = async (numberOfNotes: number) => {
-    let articles: IArticle[] = [];
+  public getArticles = async (numberOfNotes: number): Promise<IArticle[]> => {
+    const articles: IArticle[] = [];
     //Get all articles
     const allArticles = await this.articles.all();
 
