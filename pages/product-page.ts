@@ -1,5 +1,5 @@
-import { Page } from "playwright";
-import { BasePage } from "./base-page";
+import type { Page } from 'playwright';
+import { BasePage } from './base-page';
 
 interface IProduct {
   name: string;
@@ -13,45 +13,45 @@ export class ProductPage extends BasePage {
   }
 
   //xpaths
-  xAddBtn = (name: string) => {
+  private readonly xAddBtn = (name: string) => {
     return `//div[text()='${name}']/following-sibling::button`;
   };
-  xCartQuantity = (name: string) => {
+  private readonly xCartQuantity = (name: string) => {
     return `//td[text()='${name}']/following-sibling::td[2]`;
   };
-  xProductName = (name: string) => {
+  private readonly xProductName = (name: string) => {
     return `//td[text()='${name}']/following-sibling::td[3]`;
   };
-  xTotalPrice = '//td[@class="total-price"]';
+  private readonly xTotalPrice = '//td[@class="total-price"]';
 
   //locators
-  addBtn = (name: string) => {
+  public readonly addBtn = (name: string) => {
     return this.page.locator(this.xAddBtn(name));
   };
-  cartQuantity = (name: string) => {
+  public readonly cartQuantity = (name: string) => {
     return this.page.locator(this.xCartQuantity(name));
   };
-  cartProductName = (name: string) => {
+  public readonly cartProductName = (name: string) => {
     return this.page.locator(this.xProductName(name));
   };
-  totalPrice = this.page.locator(this.xTotalPrice);
+  public readonly totalPrice = this.page.locator(this.xTotalPrice);
 
   //functions
-  openProductPage = async () => {
+  public openProductPage = async (): Promise<void> => {
     await this.openMainPage();
-    await this.goToPage("Product page");
+    await this.goToPage('Product page');
   };
 
-  addProduct = async (product: IProduct) => {
+  public addProduct = async (product: IProduct): Promise<void> => {
     const addButton = this.addBtn(product.name);
-    await addButton.waitFor({ state: "visible" });
+    await addButton.waitFor({ state: 'visible' });
     await addButton.click({
       clickCount: product.quantity,
       delay: 100,
     });
   };
 
-  addProducts = async (products: IProduct[]) => {
+  public addProducts = async (products: IProduct[]): Promise<void> => {
     for (const product of products) {
       try {
         await this.addProduct(product);

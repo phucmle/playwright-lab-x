@@ -1,5 +1,5 @@
-import { Locator, Page } from "playwright";
-import { BasePage } from "./base-page";
+import type { Page } from 'playwright';
+import { BasePage } from './base-page';
 
 export class DragAndDropPage extends BasePage {
   constructor(page: Page) {
@@ -7,26 +7,26 @@ export class DragAndDropPage extends BasePage {
   }
 
   //xpaths
-  xPuzzlePiece = (num: number) => {
+  private readonly xPuzzlePiece = (num: number) => {
     return `//div[@id='piece-${num}']`;
   };
 
-  xDropZone = (num: number) => {
+  private readonly xDropZone = (num: number) => {
     return `//div[@data-piece=${num}]`;
   };
 
   //locators
-  puzzlePiece = (num: number) => {
+  public readonly puzzlePiece = (num: number) => {
     return this.page.locator(this.xPuzzlePiece(num));
   };
 
-  dropZone = (num: number) => {
+  public readonly dropZone = (num: number) => {
     return this.page.locator(this.xDropZone(num));
   };
 
   //functions
-  openDragAndDropPage = async () => {
+  public openDragAndDropPage = async (): Promise<void> => {
     await this.openMainPage();
-    await this.goToPage("Puzzle drag and drop game");
+    await this.goToPage('Puzzle drag and drop game');
   };
 }

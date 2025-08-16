@@ -1,5 +1,5 @@
-import { Locator, Page } from "playwright";
-import { BasePage } from "./base-page";
+import type { Locator, Page } from 'playwright';
+import { BasePage } from './base-page';
 
 export class ToDoPage extends BasePage {
   constructor(page: Page) {
@@ -7,26 +7,26 @@ export class ToDoPage extends BasePage {
   }
 
   //xpaths
-  xTaskInput = '//input[@id="new-task"]';
-  xAddTaskBtn = '//button[@id="add-task"]';
-  xDeleteBtns = '//button[contains(@id,"delete")]';
+  private readonly xTaskInput = '//input[@id="new-task"]';
+  private readonly xAddTaskBtn = '//button[@id="add-task"]';
+  private readonly xDeleteBtns = '//button[contains(@id,"delete")]';
 
   //locators
-  taskInput = this.page.locator(this.xTaskInput);
-  addTaskBtn = this.page.locator(this.xAddTaskBtn);
-  deleteButtons = this.page.locator(this.xDeleteBtns);
+  public readonly taskInput = this.page.locator(this.xTaskInput);
+  public readonly addTaskBtn = this.page.locator(this.xAddTaskBtn);
+  public readonly deleteButtons = this.page.locator(this.xDeleteBtns);
 
   //functions
-  getBtnId = (btn: Locator) => {
-    return btn.getAttribute("id");
+  private getBtnId = (btn: Locator): Promise<string | null> => {
+    return btn.getAttribute('id');
   };
 
-  openToDoPage = async () => {
+  public openToDoPage = async (): Promise<void> => {
     await this.openMainPage();
-    await this.goToPage("Todo page");
+    await this.goToPage('Todo page');
   };
 
-  addTasks = async (numberOfTasks: number, taskPrefix: string = "Todo ") => {
+  public addTasks = async (numberOfTasks: number, taskPrefix = 'Todo '): Promise<void> => {
     for (let i = 1; i <= numberOfTasks; i++) {
       const taskName = taskPrefix + i;
       await this.taskInput.fill(taskName);
@@ -34,7 +34,7 @@ export class ToDoPage extends BasePage {
     }
   };
 
-  deleteOddTasks = async () => {
+  public deleteOddTasks = async (): Promise<void> => {
     const deleteButtons = await this.deleteButtons.all();
 
     // Common issue when trying to delete elements in a loop while using a pre-collected list of locators.
@@ -57,14 +57,14 @@ export class ToDoPage extends BasePage {
       const deleteButton = deleteButtons[i];
       const buttonId = await this.getBtnId(deleteButton);
       if (!buttonId) {
-        throw new Error("Button id not found");
+        throw new Error('Button id not found');
       }
 
-      const idNumber = buttonId.split("-")[1];
+      const idNumber = buttonId.split('-')[1];
       const isOdd: boolean = parseInt(idNumber) % 2 !== 0;
 
       if (isOdd) {
-        this.page.once("dialog", (dialog) => dialog.accept());
+        this.page.once('dialog', (dialog) => dialog.accept());
         await deleteButton.click();
       }
     }
