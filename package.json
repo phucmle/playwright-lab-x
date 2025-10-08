@@ -34,6 +34,7 @@
     "prettier": "^3.5.3"
   },
   "dependencies": {
-    "playwright": "^1.51.1"
+    "playwright": "^1.51.1",
+    "tesseract.js": "^6.0.1"
   }
 }

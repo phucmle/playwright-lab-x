@@ -7,3 +7,4 @@ node_modules/
 .vscode/
 test-data/
 test-results.xml
+eng.traineddata
