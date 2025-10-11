@@ -1,6 +1,9 @@
 import { expect, test } from '../fixtures/test-fixture';
 
-test.describe('captcha verification', () => {
+// These tests are configured to run in serial mode (single worker)
+// because parallel execution can cause issues with waiting for API responses due to shared backend endpoints.
+test.describe.configure({ mode: 'serial' });
+test.describe('@separately Captcha verification', () => {
   test.beforeEach('Go to the captcha verification page', async ({ captchaPage }) => {
     await captchaPage.openCaptchaPage();
   });

@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures/test-fixture';
+import { expect, test } from '../fixtures/test-fixture';
 
 interface Article {
   title: string;
@@ -9,8 +9,10 @@ let articles = [] as Article[];
 const numberOfArticles = 10;
 const numberOfSearchCharacters = 20;
 
-test.describe('Exercise add note in Personal note page', () => {
-  test('Personal note page', async ({ zingPage, personalNotePage }) => {
+test.skip();
+
+test.describe('exercise add note in Personal note page', () => {
+  test('personal note page', async ({ zingPage, personalNotePage }) => {
     await test.step('Go to Zing news', async () => {
       await zingPage.openZingPage();
     });

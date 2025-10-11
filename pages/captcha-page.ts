@@ -4,7 +4,6 @@ import { OCRUtils } from '../tests/utils/ocrUtils';
 import { BasePage } from './base-page';
 
 export class CaptchaPage extends BasePage {
-  private captchaEndpoint = 'https://material.playwrightvn.com/backend/captcha.php?action=generate';
   constructor(page: Page) {
     super(page);
   }
@@ -29,7 +28,10 @@ export class CaptchaPage extends BasePage {
   };
 
   public getCaptchaFromAPI = async (): Promise<string> => {
-    const response = await this.page.waitForResponse(this.captchaEndpoint);
+    const response = await this.page.waitForResponse(
+      (response) =>
+        response.url().includes('captcha.php?action=generate') && response.status() === 200
+    );
     const body = await response.json();
     return body.captcha.toString();
   };

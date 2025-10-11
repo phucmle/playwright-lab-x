@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test:all": "npx playwright test",
+    "test:all": "npx playwright test --grep @separately && npx playwright test --grep-invert @separately",
     "test:ui": "npx playwright test --ui",
     "test:headed": "npx playwright test $1 --headed",
     "test:headed:all": "npx playwright test --headed",
