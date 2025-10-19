@@ -1,11 +1,12 @@
 import { test as base } from '@playwright/test';
-import { RegisterPage } from '../../pages/register-page';
-import { ProductPage } from '../../pages/product-page';
-import { ToDoPage } from '../../pages/todo-page';
-import { PersonalNotePage } from '../../pages/personal-note-page';
-import { ZingPage } from '../../pages/zing-page';
+import { CaptchaPage } from '../../pages/captcha-page';
 import { DragAndDropPage } from '../../pages/drag-and-drop-page';
+import { PersonalNotePage } from '../../pages/personal-note-page';
+import { ProductPage } from '../../pages/product-page';
+import { RegisterPage } from '../../pages/register-page';
 import { StudentManagementPage } from '../../pages/student-management-page';
+import { ToDoPage } from '../../pages/todo-page';
+import { ZingPage } from '../../pages/zing-page';
 
 // Declare the types of your fixtures.
 type MyFixtures = {
@@ -16,6 +17,7 @@ type MyFixtures = {
   zingPage: ZingPage;
   dragAndDropPage: DragAndDropPage;
   studentManagementPage: StudentManagementPage;
+  captchaPage: CaptchaPage;
 };
 
 // Extend base test by providing "registerPage" and "productPage"...
@@ -47,6 +49,9 @@ export const test = base.extend<MyFixtures>({
   },
   studentManagementPage: async ({ page }, use) => {
     await use(new StudentManagementPage(page));
+  },
+  captchaPage: async ({ page }, use) => {
+    await use(new CaptchaPage(page));
   },
 });
 

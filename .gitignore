@@ -6,3 +6,5 @@ node_modules/
 .idea
 .vscode/
 test-data/
+test-results.xml
+eng.traineddata
